@@ -11,6 +11,7 @@ trigger:
     - main
   event:
     - push
+    - custom
 
 steps:
   - name: deploy next

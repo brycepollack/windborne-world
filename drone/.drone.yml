@@ -23,9 +23,10 @@ steps:
         path: /host/secrets/windborne
     commands:
       - set -e
-      - docker build -t windborne-next .
+      - export GOOGLE_KEY=$(grep NEXT_PUBLIC_GOOGLE_MAPS_API_KEY /host/secrets/windborne/.env | cut -d '=' -f2)
+      - docker build --build-arg NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$GOOGLE_KEY -t windborne-next .
       - docker rm -f windborne-next || true
-      - docker run -d -p 3002:3000 --name windborne-next --env-file /host/secrets/windborne/.env windborne-next
+      - docker run -d -p 3002:3000 --name windborne-next windborne-next
 
 volumes:
   - name: docker_socket

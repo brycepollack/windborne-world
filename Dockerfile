@@ -6,6 +6,10 @@ COPY package.json yarn.lock ./
 RUN corepack enable && yarn install --frozen-lockfile --network-timeout 600000
 
 COPY . .
+
+ARG NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+ENV NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+
 RUN yarn build
 
 FROM node:18-alpine AS runner

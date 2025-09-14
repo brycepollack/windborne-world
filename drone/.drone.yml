@@ -1,0 +1,35 @@
+kind: pipeline
+type: docker
+name: deploy-windborne
+
+platform:
+  os: linux
+  arch: arm64
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
+
+steps:
+  - name: deploy next
+    image: docker:24.0-cli
+    volumes:
+      - name: docker_socket
+        path: /var/run/docker.sock
+      - name: host_secrets
+        path: /host/secrets/windborne
+    commands:
+      - set -e
+      - docker build -t windborne-next .
+      - docker rm -f windborne-next || true
+      - docker run -d -p 3000:3000 --name windborne-next --env-file /host/secrets/windborne/.env windborne-next
+
+volumes:
+  - name: docker_socket
+    host:
+      path: /var/run/docker.sock
+  - name: host_secrets
+    host:
+      path: /secrets/windborne

@@ -25,7 +25,7 @@ steps:
       - set -e
       - docker build -t windborne-next .
       - docker rm -f windborne-next || true
-      - docker run -d -p 3000:3000 --name windborne-next --env-file /host/secrets/windborne/.env windborne-next
+      - docker run -d -p 3002:3000 --name windborne-next --env-file /host/secrets/windborne/.env windborne-next
 
 volumes:
   - name: docker_socket

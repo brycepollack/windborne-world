@@ -14,7 +14,6 @@ async function fetchData<T>(url: string, parser: (raw: unknown) => T, blankValue
   try {
     const res = await fetch(url);
     const json = await res.json();
-    console.log('RAW response for', url, json);
     return parser(json.data ?? blankValue);
   } catch (err) {
     console.error(`Failed to fetch ${url}:`, err);

@@ -51,6 +51,8 @@ export default function MapComponent({ config }: MapComponentProps) {
   const [trails, setTrails] = useState<BalloonTrail[]>([]);
   const [lastUpdated, setLastUpdated] = useState<number | null>(null);
 
+  console.log('BRBP: ', process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
+
   const containerStyle = { width: '100%', height: '100%' };
   const center = { lat: 0, lng: 0 };
 

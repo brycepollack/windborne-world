@@ -17,11 +17,11 @@ export default function Home() {
   });
 
   return (
-    <main className="min-h-screen flex flex-col bg-gray-100">
+    <main className="min-h-screen flex flex-col bg-gradient-to-b from-[#dae0d3] to-white">
       <HeaderComponent />
 
       {/* Control bar */}
-      <div className="w-full bg-gray-300 flex justify-center py-3">
+      <div className="w-full bg-gradient-to-r from-[#dae0d3] to-white flex justify-center py-3">
         <div className="flex flex-col gap-3 bg-white rounded-md shadow-sm p-3">
           <ControlComponent config={config} setConfig={setConfig} />
         </div>
@@ -29,13 +29,13 @@ export default function Home() {
 
       {/* Main content */}
       <div className="flex-1 flex justify-center items-center p-4">
-        <div className="flex w-[90%] max-w-[1200px] h-[500px] bg-white border-4 border-gray-600 rounded-lg shadow-lg overflow-hidden">
-          {/* Map panel: 75% */}
+        <div className="flex w-[90%] max-w-[1200px] h-[500px] bg-gradient-to-br from-white to-[#dae0d3] border-4 border-gray-600 rounded-lg shadow-lg overflow-hidden">
+          {/* Map panel */}
           <div className="flex-[3] h-full">
             <MapComponent config={config} />
           </div>
 
-          {/* Info panel: 25% */}
+          {/* Info panel */}
           <div className="flex-[1] h-full p-4 overflow-y-auto">
             <InfoComponent config={config} />
           </div>

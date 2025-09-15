@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function FooterComponent() {
   return (
-    <footer className="bg-gray-800 text-gray-300 py-8 px-8 shadow-inner">
+    <footer className="bg-[#161616] text-gray-300 py-8 px-8 shadow-inner">
       <div className="max-w-4xl mx-auto flex flex-col gap-4 text-center">
         <h1 className="text-3xl font-extrabold text-white">What is WindBorne World?</h1>
 

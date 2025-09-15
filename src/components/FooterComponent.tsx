@@ -52,7 +52,15 @@ export default function FooterComponent() {
           >
             Bryce Pollack
           </a>
-          .
+          .{' '}
+          <a
+            href="https://github.com/brycepollack/windborne-world"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:underline"
+          >
+            Source code available on GitHub
+          </a>
         </p>
       </div>
     </footer>

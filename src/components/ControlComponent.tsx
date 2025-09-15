@@ -14,13 +14,19 @@ export default function ControlComponent({ config, setConfig }: ControlComponent
     <div className="w-full flex justify-center">
       <div
         className="grid grid-rows-2 gap-y-2 justify-items-center gap-x-8"
-        style={{ gridTemplateColumns: 'repeat(3, max-content)' }}
+        style={{ gridTemplateColumns: 'repeat(5, max-content)' }}
       >
-        {/* Row 1: Labels */}
+        {/* Labels */}
         <Typography variant="caption" className="text-gray-600 text-center">
           Show History
           <br />
           (Last 24 Hours)
+        </Typography>
+        <Typography variant="caption" className="text-gray-600 text-center">
+          Show Balloon ID
+        </Typography>
+        <Typography variant="caption" className="text-gray-600 text-center">
+          ID Size
         </Typography>
         <Typography variant="caption" className="text-gray-600 text-center">
           Balloon Size
@@ -29,13 +35,49 @@ export default function ControlComponent({ config, setConfig }: ControlComponent
           Info Type
         </Typography>
 
-        {/* Row 2: Controls */}
+        {/* Controls */}
         {/* Show History Switch */}
         <Switch
           checked={config.showTrails}
           onChange={() => setConfig({ ...config, showTrails: !config.showTrails })}
           color="primary"
         />
+
+        {/* Show IDs Switch */}
+        <Switch
+          checked={config.showIds}
+          onChange={() => setConfig({ ...config, showIds: !config.showIds })}
+          color="primary"
+        />
+
+        {/* ID Size Counter */}
+        <div className="flex items-center gap-1">
+          <IconButton
+            size="small"
+            onClick={() =>
+              setConfig(prev => ({
+                ...prev,
+                idSize: Math.max(6, prev.idSize - 1),
+              }))
+            }
+          >
+            <Remove fontSize="small" />
+          </IconButton>
+          <Typography variant="body2" className="min-w-[32px] text-center">
+            {config.idSize}px
+          </Typography>
+          <IconButton
+            size="small"
+            onClick={() =>
+              setConfig(prev => ({
+                ...prev,
+                idSize: Math.min(12, prev.idSize + 1),
+              }))
+            }
+          >
+            <Add fontSize="small" />
+          </IconButton>
+        </div>
 
         {/* Balloon Size Counter */}
         <div className="flex items-center gap-1">

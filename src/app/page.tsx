@@ -4,11 +4,14 @@ import MapComponent from '@/components/MapComponent';
 import InfoComponent from '@/components/InfoComponent';
 import ControlComponent from '@/components/ControlComponent';
 import HeaderComponent from '@/components/HeaderComponent';
+import FooterComponent from '@/components/FooterComponent';
 import { Config } from '@/types/config';
 
 export default function Home() {
   const [config, setConfig] = useState<Config>({
     showTrails: false,
+    showIds: false,
+    idSize: 6,
     balloonSize: 3,
     infoType: 'by-country',
   });
@@ -38,6 +41,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <FooterComponent />
     </main>
   );
 }

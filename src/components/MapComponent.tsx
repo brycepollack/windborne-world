@@ -81,6 +81,16 @@ export default function MapComponent({ config }: MapComponentProps) {
           <Marker
             key={idx}
             position={{ lat: p[0], lng: p[1] }}
+            label={
+              config.showIds
+                ? {
+                    text: `${idx}`,
+                    color: 'black',
+                    fontSize: `${config.idSize}px`,
+                    fontWeight: 'bold',
+                  }
+                : undefined
+            }
             icon={{
               path: google.maps.SymbolPath.CIRCLE,
               scale: config.balloonSize,

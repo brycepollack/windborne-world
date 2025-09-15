@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Windborne World',
-  description: 'Balloon tracker',
+  title: 'WindBorne World',
+  description: 'WindBorne World',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

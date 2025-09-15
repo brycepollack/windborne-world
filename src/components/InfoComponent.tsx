@@ -38,19 +38,25 @@ export default function InfoComponent({ config }: InfoComponentProps) {
   const [countryData, setCountryData] = useState<CountryData[]>([]);
   const [distanceData, setDistanceData] = useState<DistanceData[]>([]);
   const [lastUpdated, setLastUpdated] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (config.infoType === 'by-country') {
-      fetchData('/api/windborne/by-country', parseCountryData, []).then(data => {
-        setCountryData(data);
-        setLastUpdated(Date.now());
-      });
-    } else {
-      fetchData('/api/windborne/by-distance', parseDistanceData, []).then(data => {
-        setDistanceData(data);
-        setLastUpdated(Date.now());
-      });
-    }
+    setLoading(true);
+
+    const fetchFn =
+      config.infoType === 'by-country'
+        ? fetchData('/api/windborne/by-country', parseCountryData, [])
+        : fetchData('/api/windborne/by-distance', parseDistanceData, []);
+
+    fetchFn.then(data => {
+      if (config.infoType === 'by-country') {
+        setCountryData(data as CountryData[]);
+      } else {
+        setDistanceData(data as DistanceData[]);
+      }
+      setLastUpdated(Date.now());
+      setLoading(false);
+    });
   }, [config.infoType]);
 
   const dataToRender =
@@ -73,12 +79,22 @@ export default function InfoComponent({ config }: InfoComponentProps) {
           ? 'Balloons by Current Country (Last Hour)'
           : 'Balloons by Distance Travelled (Last 24 Hours)'}
       </h4>
-      {lastUpdated && (
+      {lastUpdated && !loading && (
         <div className="mb-2 text-xs text-gray-500">
           Data as of: {new Date(lastUpdated).toLocaleString()}
         </div>
       )}
-      <div className="overflow-y-auto">{dataToRender}</div>
+
+      <div className="overflow-y-auto">
+        {loading ? (
+          <div className="flex flex-col items-center gap-2 text-gray-500">
+            <div className="h-6 w-6 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+            <span className="text-xs">Loading data...</span>
+          </div>
+        ) : (
+          dataToRender
+        )}
+      </div>
     </div>
   );
 }

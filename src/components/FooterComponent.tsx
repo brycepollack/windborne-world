@@ -51,7 +51,8 @@ export default function FooterComponent() {
             className="text-blue-400 hover:underline"
           >
             Bryce Pollack
-          </a>{' '}
+          </a>
+          .
         </p>
       </div>
     </footer>

@@ -1,0 +1,4 @@
+services:
+  windborne-next:
+    env_file:
+      - ./.env.local

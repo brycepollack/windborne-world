@@ -1,0 +1,9 @@
+services:
+  windborne-next:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: windborne-next
+    restart: always
+    ports:
+      - '3002:3000'

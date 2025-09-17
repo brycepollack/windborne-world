@@ -19,19 +19,26 @@ steps:
     volumes:
       - name: docker_socket
         path: /var/run/docker.sock
-      - name: host_secrets
-        path: /host/secrets/windborne
+      - name: secrets
+        path: /secrets/windborne
+      - name: windborne
+        path: /services/windborne
     commands:
       - set -e
-      - export GOOGLE_KEY=$(grep NEXT_PUBLIC_GOOGLE_MAPS_API_KEY /host/secrets/windborne/.env | cut -d '=' -f2)
-      - docker build --build-arg NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$GOOGLE_KEY -t windborne-next .
-      - docker rm -f windborne-next || true
-      - docker run -d -p 3002:3000 --name windborne-next windborne-next
+      - apk add --no-cache docker-cli rsync
+      - mkdir -p /services/windborne
+      - rsync -av --delete /drone/src/ /services/windborne/
+      - cd /services/windborne
+      - docker compose -f docker-compose.yml -f docker-compose.production.yml pull
+      - docker compose -f docker-compose.yml -f docker-compose.production.yml up -d --build
 
 volumes:
   - name: docker_socket
     host:
       path: /var/run/docker.sock
-  - name: host_secrets
+  - name: windborne
+    host:
+      path: /services/windborne
+  - name: secrets
     host:
       path: /secrets/windborne

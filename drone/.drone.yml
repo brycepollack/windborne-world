@@ -30,7 +30,7 @@ steps:
       - rsync -av --delete /drone/src/ /services/windborne/
       - cd /services/windborne
       - docker compose -f docker-compose.yml -f docker-compose.production.yml pull
-      - docker compose -f docker-compose.yml -f docker-compose.production.yml up -d --build
+      - docker compose -f docker-compose.yml -f docker-compose.production.yml up -d --build --force-recreate
 
 volumes:
   - name: docker_socket

@@ -4,6 +4,8 @@ import { Controller } from '@/lib/controller';
 import worldData from '@/data/world.json';
 import * as turf from '@turf/turf';
 
+export const runtime = 'edge';
+
 const world = worldData as FeatureCollection<
   Polygon | MultiPolygon,
   {

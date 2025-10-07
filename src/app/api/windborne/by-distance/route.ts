@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import * as turf from '@turf/turf';
 import { Controller } from '@/lib/controller';
 
+export const runtime = 'edge';
+
 type DistanceData = [balloonId: number, kmTraveled: number][];
 
 export async function GET() {
